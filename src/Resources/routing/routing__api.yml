@@ -1,0 +1,16 @@
+api.login:
+  path: /login
+  methods: post
+  controller: App\Controller\DefaultController::index
+
+api.save.user:
+  path: /user
+  methods: post
+  controller: App\Controller\Api\ApiUserController::saveUser
+
+api.update.user:
+  path: /user/{id}
+  methods: put
+  controller: App\Controller\Api\ApiUserController::saveUser
+  requirements:
+    id: '\d+'

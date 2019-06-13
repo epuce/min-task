@@ -1,0 +1,37 @@
+$breakpoints: (
+  // Bootstrap breakingpoints start
+  width-sm: 576px,
+  width-md: 720px,
+  width-lg: 960px,
+  width-xl: 1200px,
+  // Bootstrap breakingpoints end
+
+  mobile: 320px,
+  mobile-max: 767px,
+
+  tablet: 768px,
+  tablet-max: 1024px,
+
+  desktop: 1025px,
+  desktop-medium: 1460px,
+  desktop-large: 1900px
+);
+
+$screenOrientations: (
+  portrait: 'portrait',
+  landscape: 'landscape'
+);
+
+//============= Z-index layer start ==========
+$z-layers: (
+        'base': 1,
+);
+
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+
+  @return map-get($z-layers, $layer);
+}
+//============= Z-index layer end ==========

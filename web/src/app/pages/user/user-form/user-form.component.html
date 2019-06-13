@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-content>
+        <form name="form_login"
+              autocomplete="off"
+              novalidate>
+
+            <table cellspacing="0"
+                   class="col-xl-12">
+
+                <tr>
+                    <td>
+                        <div class="row">
+                            <mat-form-field class="col-xl-12">
+                                <input matInput
+                                       placeholder="E-mail"
+                                       (ngModelChange)="checkEmail($event)"
+                                       [(ngModel)]="user.email"
+                                       name="email"
+                                       required/>
+
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <mat-form-field class="col-xl-12">
+                                <input matInput placeholder="Password"
+                                       [(ngModel)]="user.password"
+                                       name="password"
+                                       type="password"
+                                       autocomplete="new-password"
+                                       required/>
+
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions class="text-center">
+        <button class="col-8"
+                *ngIf="!show_spinner"
+                mat-raised-button
+                (click)="saveUser()"
+                color="primary">
+
+            Save
+        </button>
+
+        <mat-spinner *ngIf="show_spinner"
+                     [diameter]="30"></mat-spinner>
+
+    </mat-card-actions>
+</mat-card>
+

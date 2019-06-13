@@ -1,0 +1,16 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 300px;
+  border-radius: 4px;
+
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+}

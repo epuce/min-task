@@ -1,0 +1,64 @@
+<mat-card>
+    <mat-card-content>
+        <form name="form_login"
+              autocomplete="off"
+              novalidate>
+
+            <table cellspacing="0"
+                   class="col-xl-12">
+
+                <tr>
+                    <td>
+                        <div class="row">
+                            <mat-form-field class="col-xl-12">
+                                <input matInput
+                                       placeholder="E-mail"
+                                       [(ngModel)]="user.email"
+                                       name="email"
+                                       required/>
+
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <mat-form-field class="col-xl-12">
+                                <input matInput placeholder="Password"
+                                       [(ngModel)]="user.password"
+                                       name="password"
+                                       type="password"
+                                       autocomplete="new-password"
+                                       required/>
+
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <div *ngIf="!show_spinner">
+            <button class="col-8"
+                    mat-raised-button
+                    (click)="login()"
+                    color="primary">
+
+                Login
+            </button>
+
+            <div class="sign-up"
+                 (click)="signUp()">
+                Sign-up
+            </div>
+        </div>
+
+
+        <mat-spinner *ngIf="show_spinner"
+                     [diameter]="30"></mat-spinner>
+
+    </mat-card-actions>
+</mat-card>
