@@ -13,11 +13,16 @@
                             <mat-form-field class="col-xl-12">
                                 <input matInput
                                        placeholder="E-mail"
+                                       type="email"
+                                       [formControl]="controls.email"
                                        (ngModelChange)="checkEmail($event)"
                                        [(ngModel)]="user.email"
                                        name="email"
                                        required/>
 
+                                <div class="error-box"
+                                     *ngIf="emailError">User with e-mail like this exists
+                                </div>
                             </mat-form-field>
                         </div>
                     </td>
@@ -26,12 +31,13 @@
                     <td>
                         <div class="row">
                             <mat-form-field class="col-xl-12">
-                                <input matInput placeholder="Password"
+                                <input matInput
+                                       placeholder="Password"
                                        [(ngModel)]="user.password"
                                        name="password"
                                        type="password"
-                                       autocomplete="new-password"
-                                       required/>
+                                       [formControl]="controls.password"
+                                       autocomplete="new-password"/>
 
                             </mat-form-field>
                         </div>
@@ -45,6 +51,7 @@
         <button class="col-8"
                 *ngIf="!show_spinner"
                 mat-raised-button
+                [disabled]="!form.valid"
                 (click)="saveUser()"
                 color="primary">
 

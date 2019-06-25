@@ -22,6 +22,7 @@ import {UserFormService} from "./pages/user/store/user-form.service";
 import { IndexComponent } from './pages/index/index.component';
 import {AppConfig} from "./services/app-config.serive";
 import {AccessControlService} from "./services/access-control.service";
+import {RssFeedService} from "./pages/index/store/rss-feed.service";
 
 const ngMaterial: any = [
     CommonModule,
@@ -56,6 +57,7 @@ const ngMaterial: any = [
     providers: [
         UserFormService,
         AppConfig,
+        RssFeedService,
     ],
     bootstrap: [AppComponent]
 })

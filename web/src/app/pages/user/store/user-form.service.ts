@@ -18,7 +18,8 @@ export class UserFormService {
             .toPromise();
     }
 
-    checkEmail(email: any) {
-        this.http.get(window.location.origin + `/api/user${JSON.stringify({email: email})}`)
+    checkEmail(email: string) {
+        return this.http.get(window.location.origin + `/api/user${JSON.stringify({email: email})}`)
+            .toPromise()
     }
 }

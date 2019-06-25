@@ -1,45 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  show_spinner = false;
+    show_spinner = false;
+    form: FormGroup;
 
-  user = {
-      email: null,
-      password: null
-  };
+    user = {
+        email: null,
+        password: null
+    };
 
-  constructor(
-      private http: HttpClient,
-      private router: Router,
-  ) { }
+    controls: any = {
+        email: new FormControl('', [Validators.pattern('^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$')]),
+        password: new FormControl('', [Validators.required])
+    };
 
-  ngOnInit() {
-  }
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+    ) {
+    }
 
-  login() {
-      this.show_spinner = true;
+    ngOnInit() {
+        this.form = new FormGroup(this.controls);
+    }
 
-      this.http.post('/api/login', this.user).toPromise().then((response) => {
-          const content = response['content'];
+    login() {
+        this.show_spinner = true;
 
-          if (content.user_has_access) {
-              window.location.href = '/';
-          } else {
-              this.show_spinner = false;
+        this.http.post('/api/login', this.user).toPromise().then((response) => {
+            const content = response['content'];
 
-              alert('Wrong credentials, please try again.');
-          }
-      });
-  }
+            if (content.user_has_access) {
+                window.location.href = '/';
+            } else {
+                this.show_spinner = false;
+
+                alert('Wrong credentials, please try again.');
+            }
+        });
+    }
 
     signUp() {
-      this.router.navigate(['/sign-up'])
+        this.router.navigate(['/sign-up'])
     }
 }

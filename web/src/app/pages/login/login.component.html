@@ -13,9 +13,9 @@
                             <mat-form-field class="col-xl-12">
                                 <input matInput
                                        placeholder="E-mail"
+                                       [formControl]="controls.email"
                                        [(ngModel)]="user.email"
-                                       name="email"
-                                       required/>
+                                       name="email"/>
 
                             </mat-form-field>
                         </div>
@@ -25,12 +25,14 @@
                     <td>
                         <div class="row">
                             <mat-form-field class="col-xl-12">
-                                <input matInput placeholder="Password"
+                                <input matInput
+                                       placeholder="Password"
                                        [(ngModel)]="user.password"
+                                       placeholder="Password"
+                                       [formControl]="controls.password"
                                        name="password"
                                        type="password"
-                                       autocomplete="new-password"
-                                       required/>
+                                       autocomplete="new-password"/>
 
                             </mat-form-field>
                         </div>
@@ -44,6 +46,7 @@
         <div *ngIf="!show_spinner">
             <button class="col-8"
                     mat-raised-button
+                    [disabled]="!form.valid"
                     (click)="login()"
                     color="primary">
 

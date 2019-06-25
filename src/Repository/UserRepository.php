@@ -19,13 +19,34 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function getUserByEmail($email)
+    /**
+     * @param $email
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findUserByEmail($email)
     {
         $qb = $this->createQueryBuilder('user')
-            ->andWhere('user.email = :email')
+            ->andWhere('user.eMail = :email')
             ->setParameter('email', $email)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
+
+        return $qb;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findUserById($id)
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->andWhere('user.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
 
         return $qb;
     }

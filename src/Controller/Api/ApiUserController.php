@@ -30,7 +30,7 @@ class ApiUserController extends AbstractController {
         $data = json_decode($request->getContent(), true);
 
         if ($id !== null) {
-            $user = $userStorage->getUserByEmail($id);
+            $user = $userStorage->findUserById($id);
         } else {
             $user = new User();
         }
@@ -47,6 +47,23 @@ class ApiUserController extends AbstractController {
 
         return ApiResponse::content(
             ['status' => 'ok'],
+            200,
+            $stopWatch->stop()->getDuration()
+        );
+    }
+
+    public function findUser(
+        Request $request,
+        UserRepository $userStorage
+    ) {
+        $stopWatch = (new Stopwatch())->start(__METHOD__);
+
+        $params = (array) json_decode($request->attributes->get('params'));
+
+        $emailExists = $userStorage->findUserByEmail($params['email']);
+
+        return ApiResponse::content(
+            ['email_exists' => $emailExists ? true : false],
             200,
             $stopWatch->stop()->getDuration()
         );

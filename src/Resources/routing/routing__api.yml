@@ -14,3 +14,14 @@ api.update.user:
   controller: App\Controller\Api\ApiUserController::saveUser
   requirements:
     id: '\d+'
+
+api.get.user:
+  path: /user{params}
+  methods: get
+  controller: App\Controller\Api\ApiUserController::findUser
+
+
+api.get.rss-feed:
+  path: /rss-feed
+  methods: get
+  controller: App\Controller\Api\ApiRssController::getFeed
